@@ -6,6 +6,7 @@ export default function Cards() {
   const [cardData, setCardData] = useState([]);
   const [pickedCard, setPickedCard] = useState([])
   const [score, setScore] = useState(0);
+  const [topScore, setTopScore] = useState(0);
   const pokemonNames = ["bulbasaur", "pikachu", "vulpix", "jigglypuff", "eevee", "togepi", "mudkip", "pachirisu", "sylveon", "alcremie", "woobat", "drifloon"];
 
   // Fetch all the images/names for pokemons
@@ -44,9 +45,12 @@ export default function Cards() {
       setPickedCard([]);
       return;
     }
+
     // Update score
     setScore(score => score + 1);
-    console.log(pickedCard.length)
+    if(score >= topScore) {
+      setTopScore(score + 1);
+    }
 
     setPickedCard(prev => [...prev, event.target.name])
     if(pickedCard.length === pokemonNames.length-1){
@@ -70,12 +74,22 @@ export default function Cards() {
   return (
     <>
       <div className="score-container">
-        <p>
+        <div>
+          <p>
           Your score: 
-        </p>
-        <p className="score">
-          {score}
-        </p>
+          </p>
+          <p className="score">
+            {score}
+          </p>
+        </div>
+        <div>
+          <p>
+          Highscore: 
+          </p>
+          <p className="score">
+            {topScore}
+          </p>
+        </div>
       </div>
       <div id="cards-container">
         {shuffleArray(cardData).map((card) => {
