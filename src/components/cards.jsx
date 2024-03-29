@@ -40,7 +40,7 @@ export default function Cards() {
   function onCardClick(event){
     // Check for player lose
     if(pickedCard.includes(event.target.name)){
-      alert("You already picked that card, LOSER!!!");
+      alert(`You already picked that card, game over! \nScore: ${score}`);
       setScore(0);
       setPickedCard([]);
       return;
@@ -54,7 +54,7 @@ export default function Cards() {
 
     setPickedCard(prev => [...prev, event.target.name])
     if(pickedCard.length === pokemonNames.length-1){
-      alert("Congratulations! All cards found! Keep going!")
+      alert("Congratulations! All cards found! \nNow do it again!")
       setPickedCard([]);
     }
   }
